@@ -5,6 +5,7 @@ import json
 import yaml
 import csv
 import xmltodict
+import time
 
 REQUEST_MAX_RETRY = 3
 request_retry_count = 0
@@ -19,6 +20,7 @@ def get_data_from_url(url, headers, params):
         if request_retry_count < REQUEST_MAX_RETRY:
             request_retry_count += 1
             get_data_from_url(url, headers, params)
+            time.sleep(3)
         else:
             raise requests.exceptions.RequestException(response.status_code)
 
